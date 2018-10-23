@@ -140,6 +140,10 @@ export class GaugeComponent implements AfterViewInit, OnChanges, GaugeOptions {
     if (changes['value']) {
       this.updateValue();
     }
+
+    if (changes['max']) {
+      this.updateMax();
+    }
   }
 
   private updateValue(): void {
@@ -149,6 +153,12 @@ export class GaugeComponent implements AfterViewInit, OnChanges, GaugeOptions {
       } else {
         this.gauge.setValue(this.value);
       }
+    }
+  }
+
+  private updateMax(): void {
+    if (this.gauge) {
+      this.gauge.setMaxValue(this.max);
     }
   }
 }

@@ -8,6 +8,7 @@ import { GaugeModule } from '../src';
 @Component({
   template: `
     <mwl-gauge
+	  [max]="max"
       [value]="value"
       [animated]="animated"
       [animationDuration]="animationDuration"
@@ -33,6 +34,7 @@ class TestComponent {
   dialClass: string;
   valueDialClass: string;
   valueClass: string;
+  max: number = 100;
 }
 
 describe('mwl-gauge component', () => {
@@ -181,6 +183,16 @@ describe('mwl-gauge component', () => {
       fixture.componentInstance.showValue = false;
       fixture.detectChanges();
       expect(fixture.componentInstance.gauge['gauge']).to.equal(gauge);
+    });
+
+    it('should update the max value', () => {
+      const fixture: ComponentFixture<TestComponent> = TestBed.createComponent(
+        TestComponent
+      );
+      fixture.detectChanges();
+      fixture.componentInstance.max = 50;
+      fixture.detectChanges();
+      expect(fixture.componentInstance.gauge['max']).to.equal(50);
     });
   });
 
